@@ -48,6 +48,7 @@ export default {
       this.feedback = 'You`ve exсeeded allowed amount of messages at a time. Please wait.'
       setTimeout(() => {
         this.feedback = ''
+        this.messagesCount = 0
       }, 5000);
     }
   },
