@@ -17,11 +17,16 @@ export default {
     return {
       newMessage: '',
       feedback: '',
+      messagesCount: 0,
     }
   },
   methods: {
     async addMessage() {
       if (this.newMessage) {
+        if (this.messagesCount > 4) {
+          this.messagesCountReset()
+          return
+        }
         try {
           db.collection('messages').add({
             content: this.newMessage,
@@ -29,6 +34,7 @@ export default {
             timestamp: Date.now(),
           })
 
+          this.messagesCount++
           this.newMessage = ''
           this.feedback = ''
         } catch (error) {
@@ -38,6 +44,12 @@ export default {
         this.feedback = 'You must enter a message in order to send one'
       }
     },
+    messagesCountReset() {
+      this.feedback = 'You`ve exсeeded allowed amount of messages at a time. Please wait.'
+      setTimeout(() => {
+        this.feedback = ''
+      }, 5000);
+    }
   },
 }
 </script>
