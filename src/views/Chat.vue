@@ -3,7 +3,7 @@
     <h2 class="center teal-text">Ninja chat</h2>
     <div class="card">
       <div class="card-content">
-        <ul class="messages">
+        <ul class="messages" v-chat-scroll>
           <li v-for="message in messages" :key="message.id">
             <span  :class="[ isUser(message.name) ? 'orange-text darken-1' : 'teal-text' ]">{{ message.name }}</span>
             <span class="grey-text text-darken-3">{{ message.content }}</span>
@@ -73,5 +73,25 @@ export default {
 .chat .time {
   display: block;
   font-size: .8em;
+}
+
+.chat .messages {
+  max-height: 300px;
+  overflow: auto;
+}
+
+/* .chat .messages::scrollbar, */
+.chat .messages::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* .chat .messages::scrollbar-track, */
+.chat .messages::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+/* .chat .messages::scrollbar-thumb, */
+.chat .messages::-webkit-scrollbar-thumb {
+  background: #aaa;
 }
 </style>
